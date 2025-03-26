@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  
+  --secondary: 99 102 241;
+  --secondary-foreground: 255 255 255;
+  
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+  
+  --accent: 243 244 246;
+  --accent-foreground: 15 23 42;
+  
+  --muted: 249 250 251;
+  --muted-foreground: 107 114 128;
+  
+  --border: 229 231 235;
+  --ring: 243 244 246;
+  
+  --destructive: 220 38 38;
+  --destructive-foreground: 255 255 255;
+}
+
+.dark {
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  
+  --secondary: 79 70 229;
+  --secondary-foreground: 255 255 255;
+  
+  --background: 15 23 42;
+  --foreground: 243 244 246;
+  
+  --accent: 31 41 55;
+  --accent-foreground: 243 244 246;
+  
+  --muted: 31 41 55;
+  --muted-foreground: 156 163 175;
+  
+  --border: 55 65 81;
+  --ring: 31 41 55;
+  
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground min-h-screen font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+  
+  h1 {
+    @apply text-3xl font-extrabold lg:text-4xl;
+  }
+  
+  h2 {
+    @apply text-2xl font-bold lg:text-3xl;
+  }
+  
+  h3 {
+    @apply text-xl font-bold lg:text-2xl;
+  }
+  
+  h4 {
+    @apply text-lg font-semibold;
+  }
+  
+  p {
+    @apply leading-7;
+  }
+  
+  .container {
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Navbar padding */
+  main {
+    @apply pt-16;
+  }
+  
+  /* Button animation */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 6s infinite linear;
+  }
+  
+  @keyframes shine {
+    from {
+      transform: translateX(-100%) rotate(30deg);
+    }
+    to {
+      transform: translateX(100%) rotate(30deg);
+    }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-600;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400;
+  }
+  
+  /* Glass effect */
+  .glass {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 focus-visible:ring-secondary;
+  }
+  
+  .btn-outline {
+    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-link {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
+  
+  .card {
+    @apply rounded-lg border bg-background shadow-sm;
+  }
+  
+  .form-input {
+    @apply flex h-10 w-full rounded-md border border-gray-300 dark:border-gray-700 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-2xl;
+  }
+  
+  h2 {
+    @apply text-xl;
+  }
+  
+  h3 {
+    @apply text-lg;
+  }
+  
+  .container {
+    @apply px-4;
+  }
+}
